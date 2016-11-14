@@ -1,9 +1,9 @@
 # Example of using: Spring, JSF 2 and XStream
 
 		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		|					 |
-		| Instructions how to enable this sample | 
-		|                                        | 
+							 
+		  Instructions how to enable this sample  
+		                                         
 		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This is currency conversion web application. 
