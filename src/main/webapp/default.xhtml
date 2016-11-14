@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+    <title>Demo App</title>
+</h:head>
+
+<h:body>
+    <div class="header">
+        <h:outputText value="Currency converter"
+        style="font-size: 200%; color: #ffffff; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue; margin-top:30px; margin-bottom:30px" />
+    </div>
+
+    <h:form id="form" style="margin-top:30px; margin-bottom:30px">
+
+    <!-- ********** 2 dropdowns & input field ********** -->
+        <p:panelGrid style="margin-top:20px; margin-buttom:20px;">
+            <p:row style="border: none;">
+                <p:column style="border: none;">
+                    <h:outputText value="Convert From:"></h:outputText>
+                </p:column>
+                <p:column style="border: none;">
+                    <h:selectOneMenu id="currencyConvertFrom" value="#{bean.currencyConverterService.currencyFrom}">
+                        <f:selectItem itemLabel="select" itemValue="" />
+                        <f:selectItems value="${bean.currencyResolverService.resolveCurrencyLabels()}" var="element"
+                            itemLabel="#{element.key}" itemValue="#{element.value}" />
+                        <p:ajax event="change" update="@this" />
+                    </h:selectOneMenu>
+                </p:column>
+            </p:row>
+
+            <p:row style="border: none;">
+                <p:column style="border: none;">
+                    <h:outputText value="Convert To:" />
+                </p:column>
+                <p:column style="border: none;">
+                    <h:selectOneMenu id="currencyConvertTo" value="#{bean.currencyConverterService.currencyTo}">
+                        <f:selectItem itemLabel="select" itemValue="" />
+                        <f:selectItems value="${bean.currencyResolverService.resolveCurrencyLabels()}" var="element"
+                               itemLabel="#{element.key}" itemValue="#{element.value}" />
+                        <p:ajax event="change" update="@this" />
+                    </h:selectOneMenu>
+                </p:column>
+            </p:row>
+
+            <p:row style="border: none;">
+                <p:column style="border: none;">
+                    <h:outputText value="Enter amount:" />
+                </p:column>
+                <p:column style="border: none;">
+                    <h:inputText id="amountInputFieldId" value="#{bean.currencyConverterService.amountString}">
+                        <p:ajax event="change" update="@this" />
+                    </h:inputText>
+                 </p:column>
+            </p:row>
+        </p:panelGrid>
+        <p:spacer height="30"></p:spacer>
+
+    <!-- ********** Button ********** -->
+        <h:commandButton value="convert"
+            action="#{bean.currencyConverterService.convert()}"
+            actionListener="#{bean.currencyConverterService.validate()}"
+            style="margin-top: 20px; margin-buttom: 20px;"
+            styleClass="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
+            <p:ajax update="showPopupFunction, resultsDialog, errorDialog" oncomplete="showPopup()" />
+        </h:commandButton>
+
+        <h:panelGroup id="showPopupFunction" name="showPopupFunction">
+            <script type="text/javascript">
+                function showPopup() {
+                    if (#{empty bean.currencyConverterService.messages}) {
+                        PF('resultsDialog').show();
+                    } else {
+                        PF('errorDialog').show();
+                    }
+                }
+            </script>
+        </h:panelGroup>
+
+        <!-- ********** Pop ups ********** -->
+        <p:dialog id="errorDialog" header="Warning" modal="true" showEffect="puff" widgetVar="errorDialog" resizable="false">
+            <p:panelGrid style="margin-top:20px; margin-buttom:20px;">
+                <p:dataList value="#{bean.currencyConverterService.messages}" var="message">
+                    #{message}
+                </p:dataList>
+            </p:panelGrid>
+
+            <h:commandButton value="close"
+                action="#{bean.currencyConverterService.clearMessages}"
+                oncomplete="PF('errorDialog').hide();"
+                style="margin-top: 20px; margin-buttom: 20px;"
+                styleClass="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
+                <p:ajax update="@form" />
+            </h:commandButton>
+        </p:dialog>
+
+        <p:dialog id="resultsDialog" header="Results" modal="true" showEffect="puff" widgetVar="resultsDialog" resizable="false">
+            <p:panelGrid style="margin-top:20px; margin-buttom:20px;">
+                <f:facet name="header">
+                    <p:row>
+                        <p:column style="font-weight: bold;" />
+                        <p:column style="font-weight: bold;">Currency</p:column>
+                        <p:column style="font-weight: bold;">Amount</p:column>
+                    </p:row>
+                </f:facet>
+                <p:row>
+                    <p:column style="font-weight: bold;">Convert From:</p:column>
+                    <p:column>#{bean.currencyConverterService.currencyFrom}</p:column>
+                    <p:column>#{bean.currencyConverterService.amount}</p:column>
+                </p:row>
+                <p:row>
+                    <p:column style="font-weight: bold;">Convert To:</p:column>
+                    <p:column>#{bean.currencyConverterService.currencyTo}</p:column>
+                    <p:column id="roundedResult">#{bean.currencyConverterService.roundedResult}</p:column>
+                </p:row>
+                <p:tooltip for="roundedResult" value="#{bean.currencyConverterService.result}"/>
+                <p:row style="font-weight: bold;" />
+            </p:panelGrid>
+            <h:commandButton value="close"
+                oncomplete="PF('resultsDialog').hide();"
+                style="margin-top: 20px; margin-buttom: 20px;"
+                styleClass="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-button-text ui-c">
+                <p:ajax update="@form" />
+            </h:commandButton>
+        </p:dialog>
+
+    </h:form>
+</h:body>
+</html>

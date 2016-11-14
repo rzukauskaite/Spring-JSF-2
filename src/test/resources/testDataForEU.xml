@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FxRates xmlns="http://www.lb.lt/WebServices/FxRates">
+    <FxRate>
+        <Tp>EU</Tp>
+        <Dt>2016-11-04</Dt>
+        <CcyAmt>
+            <Ccy>EUR</Ccy>
+            <Amt>1</Amt>
+        </CcyAmt>
+        <CcyAmt>
+            <Ccy>AUD</Ccy>
+            <Amt>1.4438</Amt>
+        </CcyAmt>
+    </FxRate>
+    <FxRate>
+        <Tp>EU</Tp>
+        <Dt>2016-11-04</Dt>
+        <CcyAmt>
+            <Ccy>EUR</Ccy>
+            <Amt>1</Amt>
+        </CcyAmt>
+        <CcyAmt>
+            <Ccy>BGN</Ccy>
+            <Amt>1.9558</Amt>
+        </CcyAmt>
+    </FxRate>
+</FxRates>
