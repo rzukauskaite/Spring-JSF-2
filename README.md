@@ -1,8 +1,7 @@
-# Spring-JSF-2
 # Example of using: Spring, JSF 2 and XStream
 
 		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		|										                     |
+		|					 |
 		| Instructions how to enable this sample | 
 		|                                        | 
 		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -15,7 +14,7 @@ To build this sample used technologies:
 
 
 ~~~~~~~~~~~
- 1. Tools |
+ 1. Tools 
 ~~~~~~~~~~~
 
 1.1. Building project: download maven and place under 'C:\' directory, i.e.: apache-maven-3.0.4.
@@ -24,7 +23,7 @@ To build this sample used technologies:
 
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-2. Prepare sample application |
+2. Prepare sample application 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Run following maven commands (from sample directory) to prepare sample application:
@@ -33,7 +32,7 @@ Run following maven commands (from sample directory) to prepare sample applicati
 
 
 ~~~~~~~~~~~~~~~~~~~~
-3. Run application |
+3. Run application 
 ~~~~~~~~~~~~~~~~~~~~
 
 3.1. click on startup.bat under tomcat directory.
@@ -41,7 +40,7 @@ Run following maven commands (from sample directory) to prepare sample applicati
 
 
 ~~~~~~
-Note |
+Note 
 ~~~~~~
 1. Services functionality covered by unit tests;
 
